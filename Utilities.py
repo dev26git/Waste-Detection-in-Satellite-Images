@@ -97,3 +97,27 @@ def get_windows(img, window_height: int, window_width: int):
         bottom += round(window_height / 2)
 
     return img_list
+
+
+def get_window_coords(img, window_height, window_width):
+    img_height, img_width, _ = img.shape
+
+    top = 0
+    bottom = window_height
+
+    window_coord_list = []  # Will store coordinates of all windows as tuples
+    while bottom <= img_height:
+        left = 0
+        right = window_width
+        while right <= img_width:
+            # cropped_img = img[top:bottom, left:right]
+            window_coord_list.append((top, bottom, left, right))
+
+            left += round(window_width / 2)
+            right += round(window_width / 2)
+
+        top += round(window_height / 2)
+        bottom += round(window_height / 2)
+
+    return window_coord_list
+
