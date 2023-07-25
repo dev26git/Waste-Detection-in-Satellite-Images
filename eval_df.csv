@@ -1,5 +1,5 @@
-,data_description,data_dimensions,model_used,training_time(s),Train_Accuracy,Test_Accuracy,Precision,Recall,F1 Score
-0,Original,"(11550, 49)",Random Forest Classifier,1.284,0.968,0.833,0.824,0.83,0.827
-1,Original,"(11550, 49)",Support Vector Classifier,1.771,0.807,0.811,0.801,0.808,0.804
-2,Original,"(11550, 49)",KNN Classifier,0.001,0.853,0.801,0.792,0.795,0.794
-3,Original,"(11550, 49)",Logistic Regression,0.781,0.804,0.814,0.805,0.81,0.808
+,model_used,training_time(s),Train_Accuracy,Test_Accuracy,Precision,Recall,F1 Score,roc_auc_score
+0,Random Forest Classifier,0.912,0.981,0.831,0.816,0.838,0.827,0.831
+1,Support Vector Classifier,1.539,0.801,0.809,0.798,0.808,0.803,0.809
+2,KNN Classifier,0.002,0.851,0.79,0.785,0.777,0.781,0.79
+3,Logistic Regression,0.96,0.798,0.81,0.802,0.804,0.803,0.81
