@@ -1,5 +1,5 @@
-,model_used,training_time(s),Train_Accuracy,Test_Accuracy,Precision,Recall,F1 Score,roc_auc_score
-0,Random Forest Classifier,0.912,0.981,0.831,0.816,0.838,0.827,0.831
-1,Support Vector Classifier,1.539,0.801,0.809,0.798,0.808,0.803,0.809
-2,KNN Classifier,0.002,0.851,0.79,0.785,0.777,0.781,0.79
-3,Logistic Regression,0.96,0.798,0.81,0.802,0.804,0.803,0.81
+model_used,training_time(s),Train_Accuracy,Test_Accuracy,Precision,Recall,F1 Score,roc_auc_score
+Random Forest Classifier,0.912,0.981,0.831,0.816,0.838,0.827,0.831
+Support Vector Classifier,1.539,0.801,0.809,0.798,0.808,0.803,0.809
+KNN Classifier,0.002,0.851,0.79,0.785,0.777,0.781,0.79
+Logistic Regression,0.96,0.798,0.81,0.802,0.804,0.803,0.81
