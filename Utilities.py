@@ -4,6 +4,13 @@ from skimage.feature import graycomatrix, graycoprops
 from skimage.feature import local_binary_pattern
 from sklearn.preprocessing import normalize
 
+
+FEATURE_LIST = ['dissimilarity', 'correlation', 'homogeneity', 'contrast', 'ASM', 'energy',
+                'mean_r', 'std_r', 'skewness_r', 'kurtosis_r',
+                'Bin_0', 'Bin_1', 'Bin_2', 'Bin_3', 'Bin_4',
+                'Bin_5', 'Bin_6', 'Bin_7', 'Bin_8', 'Bin_9',
+                ]
+
 # GLCM Utility function
 properties = ['dissimilarity', 'correlation', 'homogeneity', 'contrast', 'ASM', 'energy']
 
@@ -33,36 +40,37 @@ def get_lbp_features(img):
     radius = 1
     n_points = 8
     lbp_r = local_binary_pattern(r, n_points, radius, 'uniform')
-    lbp_g = local_binary_pattern(g, n_points, radius, 'uniform')
-    lbp_b = local_binary_pattern(b, n_points, radius, 'uniform')
+    # lbp_g = local_binary_pattern(g, n_points, radius, 'uniform')
+    # lbp_b = local_binary_pattern(b, n_points, radius, 'uniform')
+
     hist_r, _ = np.histogram(lbp_r, bins=np.arange(0, n_points + 3), density=True)
-    hist_g, _ = np.histogram(lbp_g, bins=np.arange(0, n_points + 3), density=True)
-    hist_b, _ = np.histogram(lbp_b, bins=np.arange(0, n_points + 3), density=True)
+    # hist_g, _ = np.histogram(lbp_g, bins=np.arange(0, n_points + 3), density=True)
+    # hist_b, _ = np.histogram(lbp_b, bins=np.arange(0, n_points + 3), density=True)
 
-    # # Normalize histograms
+    # Normalize histograms
     hist_r = normalize(hist_r[:, np.newaxis], axis=0).ravel()
-    hist_g = normalize(hist_g[:, np.newaxis], axis=0).ravel()
-    hist_b = normalize(hist_b[:, np.newaxis], axis=0).ravel()
+    # hist_g = normalize(hist_g[:, np.newaxis], axis=0).ravel()
+    # hist_b = normalize(hist_b[:, np.newaxis], axis=0).ravel()
 
-    # # Concatenate histograms
-    hist = np.concatenate([hist_r, hist_g, hist_b])
+    # Concatenate histograms
+    # hist = np.concatenate([hist_r, hist_g, hist_b])
 
     # # Extract features
     mean_r = np.mean(lbp_r)
-    mean_g = np.mean(lbp_g)
-    mean_b = np.mean(lbp_b)
+    # mean_g = np.mean(lbp_g)
+    # mean_b = np.mean(lbp_b)
     std_r = np.std(lbp_r)
-    std_g = np.std(lbp_g)
-    std_b = np.std(lbp_b)
+    # std_g = np.std(lbp_g)
+    # std_b = np.std(lbp_b)
     skewness_r = np.mean(((lbp_r - mean_r) / std_r) ** 3)
-    skewness_g = np.mean(((lbp_g - mean_g) / std_g) ** 3)
-    skewness_b = np.mean(((lbp_b - mean_b) / std_b) ** 3)
+    # skewness_g = np.mean(((lbp_g - mean_g) / std_g) ** 3)
+    # skewness_b = np.mean(((lbp_b - mean_b) / std_b) ** 3)
     kurtosis_r = np.mean(((lbp_r - mean_r) / std_r) ** 4) - 3
-    kurtosis_g = np.mean(((lbp_g - mean_g) / std_g) ** 4) - 3
-    kurtosis_b = np.mean(((lbp_b - mean_b) / std_b) ** 4) - 3
+    # kurtosis_g = np.mean(((lbp_g - mean_g) / std_g) ** 4) - 3
+    # kurtosis_b = np.mean(((lbp_b - mean_b) / std_b) ** 4) - 3
 
-    arr = [mean_r, mean_g, mean_b, std_r, std_g, std_b, skewness_r, skewness_g, skewness_b, kurtosis_r, kurtosis_g, kurtosis_b]
-    return np.concatenate((arr, hist))
+    arr = [mean_r, std_r, skewness_r, kurtosis_r]
+    return np.concatenate((arr, hist_r))
 
 
 def get_features(img_rgb):
@@ -70,6 +78,7 @@ def get_features(img_rgb):
 
     # get glcm features
     glcm_features = get_glcm_features(img_gray, props=properties)
+
     # get lbp features
     lbp_features = get_lbp_features(img_rgb)
 
