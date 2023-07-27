@@ -16,6 +16,9 @@ properties = ['dissimilarity', 'correlation', 'homogeneity', 'contrast', 'ASM', 
 
 
 def get_glcm_features(img, props, dists=[5], agls=[0], lvl=256, sym=True, norm=True):
+    '''
+    Get the GLCM features of passed image
+    '''
 
     glcm = graycomatrix(img,
                         distances=dists,
@@ -31,8 +34,11 @@ def get_glcm_features(img, props, dists=[5], agls=[0], lvl=256, sym=True, norm=T
     return feature
 
 
-# LBP Utility function
 def get_lbp_features(img):
+    '''
+    Get LBP features of passed image
+    '''
+
     # Split the image into RGB channels
     r, g, b = cv2.split(img)
 
